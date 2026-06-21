@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🩺 HealthMesh AI
+# 🩺 SIRONA AI
 
 ### Patient-Owned Healthcare Trust Network
 
@@ -40,7 +40,7 @@
 
 ## 🧩 The Problem
 
-Healthcare data today is fragmented across hospitals, pharmacies, laboratories, and insurance
+SIRONA data today is fragmented across hospitals, pharmacies, laboratories, and insurance
 providers — and patients rarely have real visibility or control over who accesses their own
 records.
 
@@ -53,7 +53,7 @@ records.
 
 ## 💡 Our Solution
 
-**HealthMesh AI** is a **patient-owned healthcare trust layer** — not another EHR, not an AI
+**SIRONA AI** is a **patient-owned healthcare trust layer** — not another EHR, not an AI
 doctor, not a hospital management system. It's the infrastructure that sits *between*
 patients, hospitals, pharmacies, and insurers, so that:
 
