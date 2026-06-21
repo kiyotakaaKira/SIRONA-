@@ -232,11 +232,11 @@ healthmesh-ai/
 
 ## 👥 Team
 
-| Name | Role | GitHub |
-|---|---|---|
+| Name | 
+|---|
 | **Adithyan J** 
 | **Pradnya Sundar** 
-| **Ishack S** ]
+| **Ishack S** 
 | **Taarunya Giriraj** 
 
 ## 📄 License
