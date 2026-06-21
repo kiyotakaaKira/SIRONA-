@@ -1,0 +1,171 @@
+:root {
+  --background: #0A1628;
+  --foreground: #F0F4F8;
+
+  --color-vault: #38B2AC;
+  --color-consent: #3182CE;
+  --color-safety: #805AD5;
+  --color-emergency: #E53E3E;
+  --color-continuity: #48BB78;
+  --color-alert: #ED8936;
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-deep: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 28px;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Dynamic Gradient Mesh Backgrounds */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(49, 130, 206, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(56, 178, 172, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(128, 90, 213, 0.06) 0%, transparent 45%);
+  filter: blur(60px);
+  pointer-events: none;
+  /* Bug 3 fix: promote to compositor layer to avoid main-thread repaints */
+  will-change: transform;
+  animation: mesh-breathe 12s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-breathe {
+  0% { opacity: 0.85; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+.bg-mesh-animated {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  /* Bug 3 fix: compositor layer so orb animations don't trigger main-thread paint */
+  will-change: transform;
+}
+
+.bg-mesh-animated::before,
+.bg-mesh-animated::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+  animation: float-orb 18s ease-in-out infinite;
+}
+
+.bg-mesh-animated::before {
+  width: 40vw;
+  height: 40vw;
+  top: -10%;
+  left: -5%;
+  background: rgba(56, 178, 172, 0.07);
+}
+
+.bg-mesh-animated::after {
+  width: 35vw;
+  height: 35vw;
+  bottom: -15%;
+  right: -5%;
+  background: rgba(49, 130, 206, 0.08);
+  animation-delay: -9s;
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3%, 2%) scale(1.08); }
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Subtle Noise Textures */
+/* Bug 3 fix: the feTurbulence SVG filter was evaluated on every repaint
+   (position:fixed elements repaint on scroll). Switched to a static
+   CSS noise pattern with contain:strict so it never triggers a repaint. */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  contain: strict;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-lens {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.glow-cyan { box-shadow: 0 0 40px rgba(56, 178, 172, 0.15); }
+.glow-blue { box-shadow: 0 0 40px rgba(49, 130, 206, 0.15); }
+.glow-green { box-shadow: 0 0 40px rgba(72, 187, 120, 0.15); }
+.glow-purple { box-shadow: 0 0 40px rgba(128, 90, 213, 0.15); }
+.glow-red { box-shadow: 0 0 40px rgba(229, 62, 62, 0.15); }
+
+.text-glow-cyan { text-shadow: 0 0 30px rgba(56, 178, 172, 0.4); }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "../../../packages/ui/tokens.css";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
